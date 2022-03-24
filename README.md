@@ -14,22 +14,22 @@
 
 ### System Overview:
 1. Implement the Blackjack game:
-  - Look into crates that are helpful to implementing the game.
-  - Create game interfaces through output from terminal.
-  - Implement rules of blackjack.
-  - Create sample game states to test the games.
-  - Implement game tutorial in the terminal.
+  - [ ] Look into crates that are helpful to implementing the game.
+  - [ ] Create game interfaces through output from terminal.
+  - [ ] Implement rules of blackjack.
+  - [ ] Create sample game states to test the games.
+  - [ ] Implement game tutorial in the terminal.
 2. Build the backend server to handle all the game states and user information:
-  - Look into technology to use to build backend.
-  - Implement ability to process and check moves.
-  - Database for user info.
-  - Database for ongoing games.
-  - Allow creating rooms for different players.
+  - [ ] Look into technology to use to build backend.
+  - [ ] Implement ability to process and check moves.
+  - [ ] Database for user info.
+  - [ ] Database for ongoing games.
+  - [ ] Allow creating rooms for different players.
 3. Connect the backend server and the game through API communication:
-  - REST API with CRUD(create, read, update, and delete) functionality of all the game states and user information.
-  - Web sockets allow user play games against each other live.
-  - Web requests error handling.
-  - Connection status indicator during/at the beginning of the game.
+  - [ ] REST API with CRUD(create, read, update, and delete) functionality of all the game states and user information.
+  - [ ] Web sockets allow user play games against each other live.
+  - [ ] Web requests error handling.
+  - [ ] Connection status indicator during/at the beginning of the game.
 
 ### Possible challenges:
 - Finding suitable technologies to implement the project.
