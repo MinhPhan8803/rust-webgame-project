@@ -4,11 +4,11 @@
 
 ### Group members:
 
-- Minh Phan (minhnp2), Zean(Wyatt) Huang (zeanh2), Sailaja Nallacheruvu (snall6)
+- Minh Phan (minhnp2), Zean (Wyatt) Huang (zeanh2), Sailaja Nallacheruvu (snall6)
 
 ### Introduction:
 - Our goal is to implement a multiplayer version of Blackjack. Our primary goal would be to implement all the rules of the card game and make it so that multiple users can play one game at once. We’d also like to implement a backend to handle game states, save information about users, and save their game progress. Additionally, if we have time, one extra goal would be to implement some kind of global ranking system for all users, but that is a goal that would come after implementing the game.
-- We chose this project because every member of our group was interested in topics related to networking and creating a project that connected to both that and implementing an algorithm. Our objectives with this project are to get more practice with web development and coding multiplayer games in Rust.
+- Every member of our group is interested in topics related to networking and creating a project that connected to both that and implementing an algorithm. Our objectives with this project are to get more practice with web development and coding multiplayer games in Rust.
 
 ### System Overview:
 1. Implement the Blackjack game:
