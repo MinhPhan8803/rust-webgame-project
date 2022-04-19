@@ -1,3 +1,6 @@
+use std::io::stdin;
+mod game
+
 fn main() {
     println!("Hello, world!");
 
@@ -12,17 +15,31 @@ fn main() {
     --> if dealer hits 21 exactly, dealer wins, if dealer goes over, dealer loses. 
     --> whoever has card value under 21, but closest to 21 wins. 
     */
+    let mut test = String::new();
+    stdin().read_line(&mut test).unwrap();
+    println!(test);
     let game = Blackjack::new();
     game.serve_card_player();
     game.serve_card_dealer();
     game.serve_card_player();
     game.serve_card_dealer();
+    println!("Please take a card:");
     while game.check_state().is_none() {
-        // while player_value < 21 && still input
-        // modify game.player
-        // modify game.dealer 
-        
+        let mut input = String::new();
+        //prompt user to input yes or no
+        //take input
+        if (input.as_str().to_ascii_lowercase() == "no") {
+            break;
+        }
+        game.serve_card_player();
     }
-    // var = game.check_state.unwrap
-    // print var
+    game.toggle_check();
+    while (dealer.get_total() < 17) {
+        game.serve_card_dealer();
+    }
+    // while player_value < 21 && still input
+    // modify game.player
+    // modify game.dealer 
+    let var = game.check_state.unwrap;
+    print var
 }

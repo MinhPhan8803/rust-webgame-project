@@ -7,6 +7,7 @@ mod people;
 struct Blackjack {
     player: Player,
     dealer: Dealer,
+    check: false,
     is_over: bool,
 }
 
@@ -27,6 +28,11 @@ impl Blackjack {
         Dealer(B),
         Tie(None)
     }
+
+    fn toggle_check(&self) {
+        self.check = !self.check;  
+    }
+
     fn check_state(&self) -> Option<WinnerType<Player, Dealer, Tie>> {
         let player_total: u32 = self.player.get_total();
         let dealer_total: u32 = self.player.get_total();
