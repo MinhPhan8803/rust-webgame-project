@@ -28,7 +28,7 @@ fn main() {
     game.serve_card_dealer();
     println!("Please take a card:");
     while game.check_state().is_none() {
-        let mut input = String::new();
+        let input = String::new();
         //prompt user to input yes or no
         //take input
         if input.as_str().to_ascii_lowercase() == "no" {
@@ -44,5 +44,4 @@ fn main() {
     // modify game.player
     // modify game.dealer 
     let var = game.check_state().unwrap();
-    println!("{:?}", var);
 }
