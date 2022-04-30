@@ -1,12 +1,16 @@
+//use strum::IntoEnumIterator; // 0.17.1
+use strum_macros::EnumIter; // 0.17.1
+
 pub const WINNING_POINT: u32 = 21;
 
 #[derive(Debug, Clone)]
 pub struct Card {
     pub value: u32,
     pub name: CardName,
-    pub type: CardType
+    pub card_type: CardType
 }
 
+#[derive(Debug, Clone, EnumIter, Eq, PartialEq)]
 pub enum CardName {
     Ace,
     Two,
@@ -23,6 +27,7 @@ pub enum CardName {
     King
 }
 
+#[derive(Debug, Clone, EnumIter, Eq, PartialEq)]
 pub enum CardType {
     Club,
     Diamond,
@@ -31,11 +36,11 @@ pub enum CardType {
 }
 
 impl Card {
-    pub fn new(type: CardType, name: CardName) -> Card {
+    pub fn new(card_type: CardType, name: CardName) -> Card {
         Card {
-            type: type,
-            name: name,
-            value = match name {
+            card_type: card_type,
+            name: name.clone(),
+            value: match name {
                CardName::Ace => 1, 
                CardName::Two => 2,
                CardName::Three => 3,

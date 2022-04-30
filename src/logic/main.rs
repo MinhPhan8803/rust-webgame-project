@@ -1,6 +1,9 @@
 use std::io::stdin;
-mod game
-
+mod game;
+mod people;
+mod deck;
+mod card;
+extern crate rand;
 fn main() {
     println!("Hello, world!");
 
@@ -17,8 +20,8 @@ fn main() {
     */
     let mut test = String::new();
     stdin().read_line(&mut test).unwrap();
-    println!(test);
-    let game = Blackjack::new();
+    println!("{}", test);
+    let game = game::Blackjack::new();
     game.serve_card_player();
     game.serve_card_dealer();
     game.serve_card_player();
@@ -28,18 +31,18 @@ fn main() {
         let mut input = String::new();
         //prompt user to input yes or no
         //take input
-        if (input.as_str().to_ascii_lowercase() == "no") {
+        if input.as_str().to_ascii_lowercase() == "no" {
             break;
         }
         game.serve_card_player();
     }
     game.toggle_check();
-    while (dealer.get_total() < 17) {
+    while game.dealer.get_total() < 17 {
         game.serve_card_dealer();
     }
     // while player_value < 21 && still input
     // modify game.player
     // modify game.dealer 
-    let var = game.check_state.unwrap;
-    print var
+    let var = game.check_state().unwrap();
+    println!("{:?}", var);
 }

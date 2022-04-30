@@ -1,15 +1,16 @@
-mod card;
+use crate::card;
+use crate::deck;
 use rand::Rng; // 0.8.0
 #[derive(Debug, Clone)]
 pub struct Player {
     pub card_total: u32,
-    pub player_cards: std::vector<Card>(),
+    pub player_cards: Vec<card::Card>,
 }
 
 #[derive(Debug, Clone)]
 pub struct Dealer {
     pub card_total: u32,
-    pub dealer_cards: std::vector<Card>(),
+    pub dealer_cards: Vec<card::Card>,
 }
 
 impl Player {
@@ -20,11 +21,11 @@ impl Player {
         }
     }
 
-    pub fn update_total(&self) {
+    pub fn update_total(&mut self) {
         self.card_total = 0;
         for card in self.player_cards.iter() {
-            if (card.CardName == CardName::Ace) {
-                if (self.card_total <= 10) {
+            if card.name == card::CardName::Ace {
+                if self.card_total <= 10 {
                     self.card_total += 11;
                 }
             } else {
@@ -35,9 +36,9 @@ impl Player {
 
 
     //add card
-    pub fn add_card(&mut self, new_card: Card) {
+    pub fn add_card(&mut self, new_card: card::Card) {
         self.player_cards.push(new_card);
-        update_total();
+        self.update_total();
     }
     
     //getters
@@ -45,8 +46,8 @@ impl Player {
         self.card_total
     }
 
-    pub fn get_cards(&self) -> std::vector<Card>() {
-        self.player_cards
+    pub fn get_cards(&self) -> &Vec<card::Card> {
+        &self.player_cards
     }
 }
 
@@ -58,11 +59,11 @@ impl Dealer {
         }
     }
 
-    pub fn update_total(&self) {
+    pub fn update_total(&mut self) {
         self.card_total = 0;
         for card in self.dealer_cards.iter() {
-            if (card.CardName == CardName::Ace) {
-                if (self.card_total <= 10) {
+            if card.name == card::CardName::Ace {
+                if self.card_total <= 10 {
                     self.card_total += 11;
                 }
             } else {
@@ -71,16 +72,21 @@ impl Dealer {
         }
     }
 
-    pub fn add_card(&mut self, new_card: Card) {
+    pub fn add_card(&mut self, new_card: card::Card) {
         self.dealer_cards.push(new_card);
-        update_total();
+        self.update_total();
     }
 
-    pub fn deal(&all_cards: Deck) -> Card {
-        let cards_in_deck: u32 = all_cards.len();
-        let num = rand::thread_rng().gen_range(0..cards_in_deck);
-        let card_return: Card = all_cards.at(num);
+    pub fn deal(&mut self, deck: &mut deck::Deck) -> card::Card {
+        let mut all_cards = deck.all_cards.clone();
+        let cards_in_deck = all_cards.len();
+        let num = rand::thread_rng().gen_range(0, cards_in_deck);
+        let card_return: card::Card = all_cards[num].clone();
         all_cards.remove(num);
         return card_return;
+    }
+
+    pub fn get_total(&self) -> u32 {
+        self.card_total
     }
 }
