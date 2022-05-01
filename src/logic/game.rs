@@ -78,11 +78,14 @@ impl Blackjack {
     }
     // serve card
     pub fn serve_card_player(&mut self) {
-        self.player.add_card(self.dealer.deal(&mut self.deck));
+        let mut new_card = self.dealer.deal(&mut self.deck);
+        println!("{}",new_card.card_print());
+        self.player.add_card(new_card);
     }
 
     pub fn serve_card_dealer(&mut self) {
-        let cards = self.dealer.deal(&mut self.deck);
-        self.dealer.add_card(cards);
+        let mut new_card = self.dealer.deal(&mut self.deck);
+        println!("{}",new_card.card_print());
+        self.dealer.add_card(new_card);
     }
 }

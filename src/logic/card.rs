@@ -54,4 +54,33 @@ impl Card {
             }
         }
     }
+    pub fn card_print(&mut self) -> String {
+        let mut name = String::new();
+        name.push_str(
+            match self.name {
+                CardName::Ace => "Ace", 
+               CardName::Two => "Two",
+               CardName::Three => "Three",
+               CardName::Four => "Four",
+               CardName::Five => "Five",
+               CardName::Six => "Six",
+               CardName::Seven => "Seven",
+               CardName::Eight => "Eight",
+               CardName::Nine => "Nine",
+               CardName::Ten => "Ten",
+               CardName::Jack => "Jack",
+               CardName::Queen => "Queen",
+               CardName::King => "King"
+            }
+        );
+        name.push_str(
+            match self.card_type {
+               CardType::Club => " of Club",
+               CardType::Diamond => " of Diamond",
+               CardType::Heart => " of Heart",
+               CardType::Spade => " of Spade",
+            }
+        );
+        name
+    }
 }

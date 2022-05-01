@@ -18,6 +18,7 @@ fn main() {
     */
     let mut play = String::new();
     println!("Welcome to a black jack game:");
+    println!("Type anything to continue");
     stdin().read_line(&mut play).unwrap();
     while play.as_str().to_ascii_lowercase() != "no" {
         println!("new game started");
@@ -35,8 +36,8 @@ fn main() {
             if game.check_state().is_some() {
                 break;
             }
-            stdin().read_line(&mut input).unwrap();
             println!("Says anything to keep dealing, or no to stop your turn");
+            stdin().read_line(&mut input).unwrap();
         }
         println!("The winner is:");
         let winner = match game.check_state().unwrap() {
