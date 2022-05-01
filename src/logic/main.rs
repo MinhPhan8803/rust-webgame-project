@@ -21,32 +21,45 @@ fn main() {
     println!("Type anything to continue");
     stdin().read_line(&mut play).unwrap();
     while play.as_str().to_ascii_lowercase() != "no" {
+
+        //Game bootup
+        println!("{}",play);
+        play.clear();
         println!("new game started");
         let mut game = game::Blackjack::new();
+
+        // Serve initial cards to players and dealers
         game.serve_card_player();
+        println!("Player's current value is: {:?}", game.get_player().get_total());
         game.serve_card_dealer();
         game.serve_card_player();
-        game.serve_card_dealer();
+        println!("Player's current value is: {:?}", game.get_player().get_total());
+        game.serve_card_dealer();    
+
         println!("Please take a card:");
         let mut input = String::new();
         //prompt user to input yes or no
         //take input
-        while input.as_str().to_ascii_lowercase() != "no" {
+        while input.as_str().to_ascii_lowercase() != "no" && game.check_state().is_none() {
             game.serve_card_player();
-            if game.check_state().is_some() {
-                break;
-            }
-            println!("Says anything to keep dealing, or no to stop your turn");
+            input.clear();
+            println!("Player's current value is: {:?}", game.get_player().get_total());
+            println!("Say anything to keep dealing, or no to stop your turn");
             stdin().read_line(&mut input).unwrap();
         }
+
+        //Announce Winner
         println!("The winner is:");
-        let winner = match game.check_state().unwrap() {
-            game::WinnerType::Player => "The player",
-            game::WinnerType::Dealer => "The dealer",
-            game::WinnerType::Tie => "Nobody"
+        let winner = match game.check_state() {
+            Some(game::WinnerType::Player) => "The player".to_string(),
+            Some(game::WinnerType::Dealer) => "The dealer".to_string(),
+           Some(game::WinnerType::Tie) => "Tie".to_string(),
+           None => "Nobody".to_string()
         };
         println!("{}", winner);
-        println!("Says anything to keep playing, or no to stop the game");
+        
+        // End
+        println!("Say anything to keep playing, or no to stop the game");
         stdin().read_line(&mut play).unwrap();
     }
     println!("Come back to play next time!");
