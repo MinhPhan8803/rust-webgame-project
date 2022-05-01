@@ -20,15 +20,14 @@ fn main() {
     println!("Welcome to a black jack game:");
     println!("Type anything to continue");
     stdin().read_line(&mut play).unwrap();
-    while play.as_str().to_ascii_lowercase() != "no" {
+    while play.as_str().to_ascii_lowercase() != "no\n" {
 
         //Game bootup
-        println!("{}",play);
         play.clear();
         println!("new game started");
         let mut game = game::Blackjack::new();
 
-        // Serve initial cards to players and dealers
+        // Serve initial cards to player and dealer
         game.serve_card_player();
         println!("Player's current value is: {:?}", game.get_player().get_total());
         game.serve_card_dealer_open_card();
@@ -36,11 +35,10 @@ fn main() {
         println!("Player's current value is: {:?}", game.get_player().get_total());
         game.serve_card_dealer();    
 
+        //prompt user to input and deal card
         println!("Please take a card:");
         let mut input = String::new();
-        //prompt user to input yes or no
-        //take input
-        while input.as_str().to_ascii_lowercase() != "no" && game.check_state().is_none() {
+        while input.as_str().to_ascii_lowercase() != "no\n" && game.check_state().is_none() {
             input.clear();
             game.serve_card_player();
             println!("Player's current value is: {:?}", game.get_player().get_total());

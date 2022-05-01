@@ -78,11 +78,10 @@ impl Dealer {
     }
 
     pub fn deal(&mut self, deck: &mut deck::Deck) -> card::Card {
-        let mut all_cards = deck.all_cards.clone();
-        let cards_in_deck = all_cards.len();
-        let num = rand::thread_rng().gen_range(0, cards_in_deck);
-        let card_return: card::Card = all_cards[num].clone();
-        all_cards.remove(num);
+        let num_cards_in_deck = deck.all_cards.len();
+        let num = rand::thread_rng().gen_range(0, num_cards_in_deck);
+        let card_return: card::Card = deck.all_cards[num].clone();
+        deck.all_cards.remove(num);
         return card_return;
     }
 
