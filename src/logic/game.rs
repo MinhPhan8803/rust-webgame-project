@@ -35,7 +35,7 @@ impl Blackjack {
         self.check = !self.check;  
     }
 
-    pub fn check_winner_beginning(&mut self) -> Option<WinnerType> {
+    /*pub fn check_winner_beginning(&mut self) -> Option<WinnerType> {
         if self.player.get_total() == card::WINNING_POINT && self.dealer.get_total() == card::WINNING_POINT {
             return Some(WinnerType::Tie);
         } else if self.player.get_total() == card::WINNING_POINT {
@@ -45,7 +45,7 @@ impl Blackjack {
         } else {
             return None;
         }
-    }
+    }*/
 
     pub fn check_state(&mut self) -> Option<WinnerType> {
         let player_total: u32 = self.player.get_total();
@@ -96,8 +96,13 @@ impl Blackjack {
     }
 
     pub fn serve_card_dealer(&mut self) {
+        let new_card = self.dealer.deal(&mut self.deck);
+        self.dealer.add_card(new_card);
+    }
+
+    pub fn serve_card_dealer_open_card(&mut self) {
         let mut new_card = self.dealer.deal(&mut self.deck);
-        //println!("{}",new_card.card_print());
+        println!("Dealer's first card is {}",new_card.card_print());
         self.dealer.add_card(new_card);
     }
 }

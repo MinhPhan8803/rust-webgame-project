@@ -31,7 +31,7 @@ fn main() {
         // Serve initial cards to players and dealers
         game.serve_card_player();
         println!("Player's current value is: {:?}", game.get_player().get_total());
-        game.serve_card_dealer();
+        game.serve_card_dealer_open_card();
         game.serve_card_player();
         println!("Player's current value is: {:?}", game.get_player().get_total());
         game.serve_card_dealer();    
@@ -41,8 +41,8 @@ fn main() {
         //prompt user to input yes or no
         //take input
         while input.as_str().to_ascii_lowercase() != "no" && game.check_state().is_none() {
-            game.serve_card_player();
             input.clear();
+            game.serve_card_player();
             println!("Player's current value is: {:?}", game.get_player().get_total());
             println!("Say anything to keep dealing, or no to stop your turn");
             stdin().read_line(&mut input).unwrap();
