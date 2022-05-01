@@ -11,11 +11,11 @@ pub enum WinnerType {
 
 #[derive(Debug)]
 pub struct Blackjack {
-    pub player: people::Player,
-    pub dealer: people::Dealer,
-    pub deck: deck::Deck,
-    pub check: bool,
-    pub is_over: bool,
+    player: people::Player,
+    dealer: people::Dealer,
+    deck: deck::Deck,
+    check: bool,
+    is_over: bool,
 }
 
 impl Blackjack {

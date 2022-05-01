@@ -1,12 +1,10 @@
-use std::io::stdin;
+use std::io::{stdin, stdout, Write};
 mod game;
 mod people;
 mod deck;
 mod card;
 extern crate rand;
 fn main() {
-    println!("Hello, world!");
-
     //gameplay
     /*
     --> call deal 4 times, 2 cards go to player, 2 to dealer
@@ -18,30 +16,46 @@ fn main() {
     --> if dealer hits 21 exactly, dealer wins, if dealer goes over, dealer loses. 
     --> whoever has card value under 21, but closest to 21 wins. 
     */
-    let mut test = String::new();
-    stdin().read_line(&mut test).unwrap();
-    println!("{}", test);
-    let game = game::Blackjack::new();
-    game.serve_card_player();
-    game.serve_card_dealer();
-    game.serve_card_player();
-    game.serve_card_dealer();
-    println!("Please take a card:");
-    while game.check_state().is_none() {
-        let input = String::new();
+    let mut play = String::new();
+    println!("Welcome to a black jack game:");
+    stdin().read_line(&mut play).unwrap();
+    while play.as_str().to_ascii_lowercase() != "no" {
+        println!("new game started");
+        let mut game = game::Blackjack::new();
+        game.serve_card_player();
+        game.serve_card_dealer();
+        game.serve_card_player();
+        game.serve_card_dealer();
+        println!("Please take a card:");
+        let mut input = String::new();
         //prompt user to input yes or no
         //take input
-        if input.as_str().to_ascii_lowercase() == "no" {
-            break;
+        while input.as_str().to_ascii_lowercase() != "no" {
+            game.serve_card_player();
+            if game.check_state().is_some() {
+                break;
+            }
+            stdin().read_line(&mut input).unwrap();
+            println!("Says anything to keep dealing, or no to stop your turn");
         }
-        game.serve_card_player();
+        println!("The winner is:");
+        let winner = match game.check_state().unwrap() {
+            game::WinnerType::Player => "The player",
+            game::WinnerType::Dealer => "The dealer",
+            game::WinnerType::Tie => "Nobody"
+        };
+        println!("{}", winner);
+        println!("Says anything to keep playing, or no to stop the game");
+        stdin().read_line(&mut play).unwrap();
     }
-    game.toggle_check();
-    while game.dealer.get_total() < 17 {
-        game.serve_card_dealer();
-    }
-    // while player_value < 21 && still input
-    // modify game.player
-    // modify game.dealer 
-    let var = game.check_state().unwrap();
+    println!("Come back to play next time!");
 }
+
+    // game.toggle_check();
+    // while game.get_dealer().get_total() < 17 {
+    //     game.serve_card_dealer();
+    // }
+    // // while player_value < 21 && still input
+    // // modify game.player
+    // // modify game.dealer 
+    // let var = game.check_state().unwrap();
