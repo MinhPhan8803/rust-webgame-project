@@ -88,4 +88,8 @@ impl Dealer {
     pub fn get_total(&self) -> u32 {
         self.card_total
     }
+
+    pub fn get_cards_dealer(&self) -> &Vec<card::Card> {
+        return &self.dealer_cards;
+    }
 }

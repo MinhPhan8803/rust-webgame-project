@@ -51,18 +51,23 @@ impl Blackjack {
         let player_total: u32 = self.player.get_total();
         let dealer_total: u32 = self.dealer.get_total();
         if player_total == card::WINNING_POINT && dealer_total == card::WINNING_POINT {
+            self.is_over = true;
             return Some(WinnerType::Tie);
         }
         if player_total == card::WINNING_POINT {
+            self.is_over = true;
             return Some(WinnerType::Player);
         } 
         if player_total > card::WINNING_POINT {
+            self.is_over = true;
             return Some(WinnerType::Dealer);
         }
         if dealer_total == card::WINNING_POINT {
+            self.is_over = true;
             return Some(WinnerType::Dealer);
         } 
         if dealer_total > card::WINNING_POINT {
+            self.is_over = true;
             return Some(WinnerType::Player);
         }
         /*if self.check {
@@ -73,9 +78,9 @@ impl Blackjack {
                 return Some(WinnerType::Dealer);
             }
             return Some(WinnerType::Player);
-        }
-           self.is_over = false;*/
-       None
+        }*/
+        self.is_over = false;
+        None
     }
     // get player
     pub fn get_player(&self) -> &people::Player {
