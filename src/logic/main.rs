@@ -58,7 +58,8 @@ fn main() {
                 game.serve_card_player();
                 println!("Player's current value is: {:?}", game.get_player().get_total());
                 thread::sleep(one_second);
-                println!("Say anything to keep dealing, or no to stop your turn, you will lose your turn if you already went over 21");
+                println!("Say anything to keep dealing, or no to stop your turn.");
+                println!("The game will automatically stop if your total card value is over 21.");
                 println!("\n");
                 thread::sleep(one_second);
                 stdin().read_line(&mut input).unwrap();
