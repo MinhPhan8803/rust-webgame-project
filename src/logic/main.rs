@@ -34,6 +34,7 @@ fn main() {
         thread::sleep(one_second);
         println!("Dealing initial cards");
         thread::sleep(two_second);
+
         // Serve initial cards to player and dealer
         game.serve_card_player();
         println!("Player's current value is: {:?}", game.get_player().get_total());
@@ -52,11 +53,15 @@ fn main() {
             println!("Please take a card, or say no to stop");
             let mut input = String::new();
             stdin().read_line(&mut input).unwrap();
-            thread::sleep(one_second);
-            while input.as_str().to_ascii_lowercase() != "no\n" && game.check_state().is_none() {
+            thread::sleep(two_second);
+            while input.as_str().to_ascii_lowercase() != "no\n" {
                 input.clear();
                 game.serve_card_player();
                 println!("Player's current value is: {:?}", game.get_player().get_total());
+                if !game.check_state().is_none() {
+                    println!("Your value is over or equal 21, the game now stops");
+                    break;
+                }
                 thread::sleep(one_second);
                 println!("Say anything to keep dealing, or no to stop your turn.");
                 println!("The game will automatically stop if your total card value is over 21.");
@@ -65,7 +70,7 @@ fn main() {
                 stdin().read_line(&mut input).unwrap();
             }
             println!("\n");
-
+            thread::sleep(two_second);
             println!("Dealer picking up his card");
             thread::sleep(two_second);
 
@@ -83,22 +88,14 @@ fn main() {
                 Some(game::WinnerType::Player) => "The player".to_string(),
                 Some(game::WinnerType::Dealer) => "The dealer".to_string(),
                 Some(game::WinnerType::Tie) => "Tie".to_string(),
-                None => {
-                    if game.get_player().get_total() > game.get_dealer().get_total() {
-                        "The player".to_string()
-                    } else if game.get_player().get_total() < game.get_dealer().get_total() {
-                        "The dealer".to_string()
-                    } else {
-                        "Tie".to_string()
-                    }
-                }
+                None => game.get_state_no_winner_yet()
             };
             println!("The player's end value is {}", game.get_player().get_total());
             println!("The dealer's end value is {}", game.get_dealer().get_total());
             print!("The dealer's cards are: ");
             let cards_dealers = game.get_dealer().get_cards_dealer();
             for card in cards_dealers.iter() {
-                print!("{}, ", card.clone().card_print());
+                print!("{:?}, ", card.clone().card_print());
             }
             println!("\n");
             println!("The winner is:");

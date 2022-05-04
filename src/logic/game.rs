@@ -82,6 +82,16 @@ impl Blackjack {
         self.is_over = false;
         None
     }
+
+    pub fn get_state_no_winner_yet(&self) -> String {
+        if self.get_player().get_total() > self.get_dealer().get_total() {
+            "The player".to_string()
+        } else if self.get_player().get_total() < self.get_dealer().get_total() {
+            "The dealer".to_string()
+        } else {
+            "Tie".to_string()
+        }
+    }
     // get player
     pub fn get_player(&self) -> &people::Player {
         &self.player
@@ -104,7 +114,7 @@ impl Blackjack {
 
     pub fn serve_card_dealer_open_card(&mut self) {
         let mut new_card = self.dealer.deal(&mut self.deck);
-        println!("Dealer's first card is {}",new_card.card_print());
+        println!("Dealer's first card is {:?}",new_card.card_print());
         self.dealer.add_card(new_card);
     }
 }
